@@ -1,19 +1,20 @@
-# Style
+# 风格
 
-Consistency is the most important aspect of style. The second most important aspect is following a style that the average C++ programmer is used to reading.
+一致性是代码风格最重要的方面，第二重要的方面是符合一般 C++ 程序员的惯用法
 
-C++ allows for arbitrary-length identifier names, so there's no reason to be terse when naming things. Use descriptive names, and be consistent in the style.
+C ++允许使用任意长度的标识符名称，因此命名时没有理由太简洁。 使用描述性名称，并保持样式一致。
 
- * `CamelCase`
- * `snake_case`
+ * `CamelCase` 驼峰命名法
+ * `snake_case` 蛇身命名法
 
-are common examples. *snake_case* has the advantage that it can also work with spell checkers, if desired.
+是常见的例子。 *snake_case* 的优点是，如果需要，它也可以与拼写检查器一起使用。
 
-## Establishing A Style Guideline
 
-Whatever style guidelines you establish, be sure to implement a `.clang-format` file that specifies the style you expect. While this cannot help with naming, it is particularly important for an open source project to maintain a consistent style.
+## 建立一个风格指南
 
-Every IDE and many editors have support for clang-format built in or easily installable with an add-in.
+无论您建立什么样式指南，请务必实现一个 `.clang-format` 文件，该文件指定所需的样式。 尽管这无助于命名，但对于开源项目而言，保持一致的风格尤为重要。
+
+每个IDE和许多编辑器都支持内置的”C/C++语言风格“， 也可通过插件轻松安装。
 
  * VSCode: [Microsoft C/C++ extension for VS Code](https://github.com/Microsoft/vscode-cpptools)
  * CLion: https://www.jetbrains.com/help/clion/clangformat-as-alternative-formatter.html
@@ -26,29 +27,30 @@ Every IDE and many editors have support for clang-format built in or easily inst
 
 
 
-## Common C++ Naming Conventions
+## 通用的 C++ 命名惯例
 
- * Types start with upper case: `MyClass`.
- * Functions and variables start with lower case: `myMethod`.
- * Constants are all upper case: `const double PI=3.14159265358979323;`.
+ * 类型以大写字母开头: `MyClass`.
+ * 函数和变量以小写字母开头: `myMethod`.
+ * 常量一律大写: `const double PI=3.14159265358979323;`.
 
-C++ Standard Library (and other well-known C++ libraries like [Boost](http://www.boost.org/)) use these guidelines:
+C++ 标准库 (和其他一些知名的 C++ 软件库，例如 [Boost](http://www.boost.org/)) 使用这些风格:
 
- * Macro names use upper case with underscores: `INT_MAX`.
- * Template parameter names use camel case: `InputIterator`.
- * All other names use snake case: `unordered_map`.
+ * 宏命名使用大写字母结合下划线: `INT_MAX`.  
+ * 模板参数命名使用驼峰命名法: `InputIterator`. 
+ * 所有其它的名字使用蛇身命名法: `unordered_map`. 
 
-## Distinguish Private Object Data
+## 区分私有对象数据
 
-Name private data with a `m_` prefix to distinguish it from public data. `m_` stands for "member" data.
+私有的成员添加前缀 `m_` 以便于区分于公有成员， `m_` 表示 "member" 数据.
 
-## Distinguish Function Parameters
+## 区分函数参数
 
-The most important thing is consistency within your codebase; this is one possibility to help with consistency.
+最重要的是代码库中的一致性。 这是帮助保持一致性的一种可能性。
 
-Name function parameters with an `t_` prefix. `t_` can be thought of as "the", but the meaning is arbitrary. The point is to distinguish function parameters from other variables in scope while giving us a consistent naming strategy.
+用 `t_` 前缀命名函数参数。 可以将 `t_` 视为 `the`，但含义是任意的。 关键是要在范围内将函数参数与其他变量区分开来，同时为我们提供一致的命名策略。
 
-Any prefix or postfix can be chosen for your organization. This is just one example. *This suggestion is controversial, for a discussion about it see issue [#11](https://github.com/lefticus/cppbestpractices/issues/11).*
+可以为你的组织选择任意的前缀或后缀。这只是一个例子，*这个建议有争议，关于它的讨论参见[#11](https://github.com/lefticus/cppbestpractices/issues/11).*
+
 
 ```cpp
 struct Size
@@ -75,16 +77,17 @@ class PrivateSize
 ```
 
 
+如非必要，尽量不要公开内部数据，隐藏数据是一个好习惯.
+
+## 不要以 `_` 开头命名任何东西
+
+为了不和编译器与标准库发生冲突，不要以 `_` 开头
+
+参见[StackOverlfow 上的讨论](http://stackoverflow.com/questions/228783/what-are-the-rules-about-using-an-underscore-in-a-c-identifier)
 
 
-## Don't Name Anything Starting With `_`
 
-If you do, you risk colliding with names reserved for compiler and standard library implementation use:
-
-http://stackoverflow.com/questions/228783/what-are-the-rules-about-using-an-underscore-in-a-c-identifier
-
-
-## Well-Formed Example
+## 格式正确的示例
 
 ```cpp
 class MyClass
@@ -107,18 +110,18 @@ private:
 
 
 
-## Enable Out-of-Source-Directory Builds
-
-Make sure generated files go into an output folder that is separate from the source folder.
+## 启用源目录外(Out-of-Source-Directory)构建
 
 
-## Use `nullptr`
+确保生成的文件放到一个与源代码分开的输出目录
 
-C++11 introduces `nullptr` which is a special value denoting a null pointer. This should be used instead of `0` or `NULL` to indicate a null pointer.
+## 使用 `nullptr`
 
-## Comments
+C++11 引入了一个 `nullprt` 来表示空指针，它应该用来替代 `0` 或 `NULL` 来表示空指针
 
-Comment blocks should use `//`, not `/* */`. Using `//` makes it much easier to comment out a block of code while debugging.
+## 注释
+
+尽量多使用 C++ 的双斜杠注释风格，这样在调试代码更加容易注释掉一大块代码
 
 ```cpp
 // this function does something
@@ -127,7 +130,7 @@ int myFunc()
 }
 ```
 
-To comment out this function block during debugging we might do:
+在调试代码时，我们可以这样注释掉这个函数:
 
 ```cpp
 /*
@@ -138,18 +141,20 @@ int myFunc()
 */
 ```
 
-which would be impossible if the function comment header used `/* */`.
+如果用 `/* */` 来注释函数，这样就很麻烦.
 
-## Never Use `using namespace` in a Header File
+## 绝不要在头文件中使用 `using namespace` 
 
-This causes the namespace you are `using` to be pulled into the namespace of all files that include the header file.
-It pollutes the namespace and it may lead to name collisions in the future.
-Writing `using namespace` in an implementation file is fine though.
+这会使你正在使用的 namespace 被放到包括头文件的所有文件的 namespace 中。
+它会污染 namespace，并且将来可能导致名称冲突。
 
+当然，在实现文件中使用 `using namespace` 是没问题的。
 
-## Include Guards
+## 包含保护
 
-Header files must contain a distinctly-named include guard to avoid problems with including the same header multiple times and to prevent conflicts with headers from other projects.
+头文件必须包含一个不同名称的包含保护，以避免多次包含同一个头文件的问题，并防止与其他项目的头文件冲突。
+
+头文件必须包含如下的宏卫语句
 
 ```cpp
 #ifndef MYPROJECT_MYCLASS_HPP
@@ -163,12 +168,12 @@ namespace MyProject {
 #endif
 ```
 
-You may also consider using the `#pragma once` directive instead which is quasi-standard across many compilers.
-It's short and makes the intent clear.
+您也可以考虑使用 `#pragma once` 指令，它在许多编译器中都是准标准的。
+它很简短，目的明确。
 
+## {} 对于语句块是必需的
 
-## {} Are Required for Blocks.
-Leaving them off can lead to semantic errors in the code.
+用 {} 来包围语句块，以避免不小心造成可能的语义错误
 
 ```cpp
 // Bad Idea
@@ -195,7 +200,7 @@ for (int i = 0; i < 15; ++i) {
 }
 ```
 
-## Keep Lines a Reasonable Length
+## 保持合理的行长度
 
 ```cpp
 // Bad Idea
@@ -211,13 +216,14 @@ if (x && y && myFunctionThatReturnsBool()
 }
 ```
 
-Many projects and coding standards have a soft guideline that one should try to use less than about 80 or 100 characters per line.
-Such code is generally easier to read.
-It also makes it possible to have two separate files next to each other on one screen without having a tiny font.
+许多项目和编码标准都有一个换行指导，即每行应使用少于80或100个字符。
+这样的代码通常更容易阅读。它还可以在一个屏幕上并排放置两个单独的文件，而无需使用很小的字体。
 
 
-## Use "" for Including Local Files
-... `<>` is [reserved for system includes](http://blog2.emptycrate.com/content/when-use-include-verses-include).
+## 使用 "" 来包含本地文件
+`<>` 是[保留来用于系统文件包含的](http://blog2.emptycrate.com/content/when-use-include-verses-include).
+
+即用 `“”` 来包含本地的头文件，用 `<>` 来包含系统文件
 
 ```cpp
 // Bad Idea. Requires extra -I directives to the compiler
@@ -239,10 +245,11 @@ It also makes it possible to have two separate files next to each other on one s
 #include "MyHeader.hpp"
 ```
 
-## Initialize Member Variables
-...with the member initializer list. 
+## 初始化成员变量
 
-For POD types, the performance of an initializer list is the same as manual initialization, but for other types there is a clear performance gain, see below.
+用成员初始化列表来初始化成员变量
+
+对于POD类型，初始化器列表的性能与手动初始化相同，但是对于其他类型，则具有明显的性能提升，请参见下文。
 
 ```cpp
 // Bad Idea
@@ -303,9 +310,9 @@ private:
 };
 ```
 
-In C++11 you can assign default values to each member (using `=` or using `{}`).
+在 C++ 11 中，你可以为每个成员变量设置默认值，就象 Java 那样 (使用 `=` 或 `{}`).
 
-### Assigning default values with =
+### 用 = 来赋默认值
 
 ```cpp
 // ... //
@@ -314,11 +321,14 @@ private:
   unsigned m_value_2 = -1; // narrowing from signed to unsigned allowed
 // ... //
 ```
-This ensures that no constructor ever "forgets" to initialize a member object.
 
-### Assigning default values with brace initialization
+这样可以确保构造函数不会忘掉初始化一个成员变量
 
-Using brace initialization does not allow narrowing at compile-time.
+通过等号来初始化成员变量，这种方法允许类型窄化，类型窄化是指一种类型转换
+
+### 用大括号来赋予初始值
+
+通过括号来初始化成员变量，这种方法不允许在编译期将类型窄化
 
 ```cpp
 // Best Idea
@@ -330,11 +340,12 @@ private:
 // ... //
 ```
 
-Prefer `{}` initialization over `=` unless you have a strong reason not to.
+比起来通过`=`， 更倾向于 `{}` 来进行成员变暖初始化， 除非你有非常合理的原由
 
-Forgetting to initialize a member is a source of undefined behavior bugs which are often extremely hard to find.
+忘记初始化是未定义的行为错误之源，通常很难被发现
 
-If the member variable is not expected to change after the initialization, then mark it `const`.
+如果成员变量在初始化后不期望被改变，就标记它为 `const`
+
 
 ```cpp
 class MyClass
@@ -350,22 +361,24 @@ private:
 };
 ```
 
-Since a const member variable cannot be assigned a new value, such a class may not have a meaningful copy assignment operator.
+由于 const 成员变量不能赋予新的值，所以拷贝和赋值函数和操作符意义有所不同。
 
-## Always Use Namespaces
+## 总是使用名称空间 namespace
 
-There is almost never a reason to declare an identifier in the global namespace. Instead, functions and classes should exist in an appropriately named namespace or in a class inside of a namespace. Identifiers which are placed in the global namespace risk conflicting with identifiers from other libraries (mostly C, which doesn't have namespaces).
+几乎没有理由在全局名称空间中声明标识符。 相反，函数和类应该存在于适当命名的名称空间中或名称空间内部的类中。 放置在全局名称空间中的标识符可能会与其他库（主要是C，没有名称空间）中的标识符发生冲突。
 
 
-## Use the Correct Integer Type for Standard Library Features
+## 遵循标准库特性，使用正确的 Integer 类型
 
-The standard library generally uses `std::size_t` for anything related to size. The size of `size_t` is implementation defined.
+标准库通常将 `std::size_t` 用于与大小有关的任何事情。 size_t 的大小由实现定义。
 
-In general, using `auto` will avoid most of these issues, but not all.
+通常，使用 `auto` 将避免大多数（但不是全部）问题。
 
-Make sure you stick with the correct integer types and remain consistent with the C++ standard library. It might not warn on the platform you are currently using, but it probably will when you change platforms.
+确保使用正确的整数类型，并与 C++ 标准库保持一致。 它可能不会在当前使用的平台上发出警告，但是当您更改平台时可能会发出警告。
 
-*Note that you can cause integer underflow when performing some operations on unsigned values. For example:*
+
+*请注意，对无符号值执行某些操作时，可能导致整数下溢。 例如：*
+
 
 ```cpp
 std::vector<int> v1{2,3,4,5,6,7,8,9};
@@ -375,59 +388,72 @@ const auto s2 = v2.size();
 const auto diff = s1 - s2; // diff underflows to a very large number
 ```
 
-## Use .hpp and .cpp for Your File Extensions
+## 使用 .hpp 和 .cpp 作为文件扩展名
 
-Ultimately this is a matter of preference, but .hpp and .cpp are widely recognized by various editors and tools. So the choice is pragmatic. Specifically, Visual Studio only automatically recognizes .cpp and .cxx for C++ files, and Vim doesn't necessarily recognize .cc as a C++ file.
+基本上这是一个优选项，但是 .hpp 和 .cpp 被各种编辑器和工具广泛认可。 因此，这个选择是务实的。 具体来说，Visual Studio 仅会自动识别 C++文件的 .cpp 和 .cxx，而Vim不一定会将 .cc 识别为 C++文件。
 
-One particularly large project ([OpenStudio](https://github.com/NREL/OpenStudio)) uses .hpp and .cpp for user-generated files and .hxx and .cxx for tool-generated files. Both are well recognized and having the distinction is helpful.
+一个特别大的项目（[OpenStudio]（https://github.com/NREL/OpenStudio））将 .hpp 和 .cpp 用于用户生成的文件，将 .hxx 和 .cxx 用于工具生成的文件。 两者都广为人知，这样的区别是很有帮助的。
 
-## Never Mix Tabs and Spaces
+## 不要混用 Tab 和 空格
 
-Some editors like to indent with a mixture of tabs and spaces by default. This makes the code unreadable to anyone not using the exact same tab indentation settings. Configure your editor so this does not happen.
+默认情况下，某些编辑器喜欢将制表符和空格混合使用。 这使得不使用完全相同的制表符缩进设置的任何人都无法阅读该代码。 配置您的编辑器，以免发生这种情况。
 
-## Never Put Code with Side Effects Inside an assert()
+## 不要在 `assert()` 的参数中放带有副作用的代码
 
 ```cpp
 assert(registerSomeThing()); // make sure that registerSomeThing() returns true
 ```
 
-The above code succeeds when making a debug build, but gets removed by the compiler when making a release build, giving you different behavior between debug and release builds.
-This is because `assert()` is a macro which expands to nothing in release mode.
+上面的代码在进行调试版本时会成功，但是在进行发行版本时会被编译器删除，从而使您在调试和发行版本之间有不同的行为。
+这是因为 `assert()` 是一个宏，在发布模式下不会扩展为任何宏。
 
-## Don't Be Afraid of Templates
+## 不要畏惧模板
 
-They can help you stick to [DRY principles](http://en.wikipedia.org/wiki/Don%27t_repeat_yourself).
-They should be preferred to macros, because macros do not honor namespaces, etc.
+他们可以帮助您坚持[DRY原则](http://en.wikipedia.org/wiki/Don%27t_repeat_yourself)。
 
-## Use Operator Overloads Judiciously
+它们应优先于宏，因为宏不支持名称空间等。
 
-Operator overloading was invented to enable expressive syntax. Expressive in the sense that adding two big integers looks like `a + b` and not `a.add(b)`. Another common example is `std::string`, where it is very common to concatenate two strings with `string1 + string2`.
+## 审慎地使用运算符重载
 
-However, you can easily create unreadable expressions using too much or wrong operator overloading. When overloading operators, there are three basic rules to follow as described [on stackoverflow](http://stackoverflow.com/questions/4421706/operator-overloading/4421708#4421708).
+运算符重载的发明是为了启用表达语法。从两个大整数相加的意义上来说像 `a + b`，而不是 ` a.add（b）`。另一个常见的例子是 `std::string`，这是很常见的，用 `string1 + string2` 连接两个字符串。
 
-Specifically, you should keep these things in mind:
+但是，你可能使用过多或错误的运算符重载来轻易创建不可读的表达式。当重载运算符时，要遵循[关于stackoverflow]（http://stackoverflow.com/questions/4421706/operator-overloading/4421708#4421708）中所述的三个基本规则。
 
-* Overloading `operator=()` when handling resources is a must. See [Consider the Rule of Zero](03-Style.md#consider-the-rule-of-zero) below.
-* For all other operators, only overload them when they are used in a context that is commonly connected to these operators. Typical scenarios are concatenating things with +, negating expressions that can be considered "true" or "false", etc.
-* Always be aware of the [operator precedence](http://en.cppreference.com/w/cpp/language/operator_precedence) and try to circumvent unintuitive constructs.
-* Do not overload exotic operators such as ~ or % unless implementing a numeric type or following a well recognized syntax in specific domain.
-* [Never](http://stackoverflow.com/questions/5602112/when-to-overload-the-comma-operator?answertab=votes#tab-top) overload `operator,()` (the comma operator).
-* Use non-member functions `operator>>()` and `operator<<()` when dealing with streams. For example, you can overload `operator<<(std::ostream &, MyClass const &)` to enable "writing" your class into a stream, such as `std::cout` or an `std::fstream` or `std::stringstream`. The latter is often used to create a string representation of a value.
-* There are more common operators to overload [described here](http://stackoverflow.com/questions/4421706/operator-overloading?answertab=votes#tab-top).
+当要处理资源时，重载 `operator=()` 是必需的， 参见后面的[考虑零原则](03-Style.md#consider-the-rule-of-zero)
 
-More tips regarding the implementation details of your custom operators can be found [here](http://courses.cms.caltech.edu/cs11/material/cpp/donnie/cpp-ops.html).
 
-## Avoid Implicit Conversions
+* 对于所有其他运算符，仅当它们在通常与这些运算符连接的上下文中使用时才重载它们。典型的场景是用 `+` 连接事物，否定可以视为 "true" 或 "false" 的表达式，等等
 
-### Single Parameter Constructors
+* 始终要注意[运算符优先级](http://en.cppreference.com/w/cpp/language/operator_precedence), 并尽量避免不直观难以理解的重载构造。
 
-Single parameter constructors can be applied at compile time to automatically convert between types. This is handy for things like `std::string(const char *)` but should be avoided in general because they can add to accidental runtime overhead.
 
-Instead mark single parameter constructors as `explicit`, which requires them to be explicitly called.
+* 除非实现数字类型，或在特定领域中遵循公认的语法，否则不要重载 `~` 或 `%` 之类的不常用的运算符。
+
+
+* 从不重载逗号运算符 `operator,()`，参见[何时重载逗号运算符]((http://stackoverflow.com/questions/5602112/when-to-overload-the-comma-operator?answertab=votes#tab-top))
+
+
+* 对于输入输出流，使用非成员函数 `operator>>()` 和 `operator<<() 来做运算符重载，例如，你可以重载 `operator<<(std::ostream &, MyClass const &)` 来启用“输出”你的类对象到一个流中，例如`std::cout` 或 `std::fstream`，抑或 `std::stringstream`，后者常用于创建一个表示其值的字符串。
+
+* 还有更多常见的运算符可以重载，参见[此处描述](http://stackoverflow.com/questions/4421706/operator-overloading?answertab=votes#tab-top).
+
+更多有关自定义运算符的实现的详细信息的窍门，可以在[这里](http://courses.cms.caltech.edu/cs11/material/cpp/donnie/cpp-ops.html)找到。
+
+
+## 避免隐式的转换
+
+### 单参数构造函数
+
+
+可以在编译时应用单参数构造函数以在类型之间自动转换。 这对于`std::string（const char *）` 之类的东西很方便，但是通常应避免使用，因为它们会增加意外的运行时开销。
+
+应该将单参数构造函数标识为 `explicit`， 这样需要它们要被显式地调用。
 
 ### Conversion Operators
 
-Similarly to single parameter constructors, conversion operators can be called by the compiler and introduce unexpected overhead. They should also be marked as `explicit`.
+类似于单参数构造函数， 转换运算符也可被编译器调用，引入意外的行为. 它们也应该标识为 `explicit`
+
+
 
 ```cpp
 //bad idea
@@ -447,11 +473,12 @@ struct S {
 };
 ```
 
-## Consider the Rule of Zero
+## 考虑零规则
 
-The Rule of Zero states that you do not provide any of the functions that the compiler can provide (copy constructor, copy assignment operator, move constructor, move assignment operator, destructor) unless the class you are constructing does some novel form of ownership.
 
-The goal is to let the compiler provide optimal versions that are automatically maintained when more member variables are added.
+零规则指出，除非正在构造的类执行某种不同寻常的所有权形式，否则不提供编译器可以提供的任何函数（复制构造函数、复制赋值运算符、移动构造函数、移动赋值运算符、析构函数）。
 
-[This article](http://www.nirfriedman.com/2015/06/27/cpp-rule-of-zero/) provides a background and explains techniques for implementing nearly 100% of the time.
+目标是让编译器提供最佳版本，当添加更多成员变量时自动维护这些版本。
+
+[这篇文章](http://www.nirfriedman.com/2015/06/27/cpp-rule-of-zero/) 提供了背景知识，并说明了将近100％的时间实现技术。
 
