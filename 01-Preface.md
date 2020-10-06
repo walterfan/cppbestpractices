@@ -18,6 +18,6 @@ C++ 最佳实践：一个可复制的代码标准文档
 
 *翻译声明*
 
-基于个人兴趣翻译 C++ 最佳实践，原文版权归于作者 Jason Turner，本人将其翻译为中文版本，并根据自己的理解有所更改。
+基于个人兴趣翻译 C++ 最佳实践，原文版权归于作者 Jason Turner，本人根据自己的理解将其翻译为中文，并未逐字逐句遵循原文，个别地方为便于理解，有所更改。
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type"> C++ 最佳实践中文版</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://cppbestpractices.com" property="cc:attributionName" rel="cc:attributionURL">Walter Fan </a>采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可。
