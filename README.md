@@ -20,12 +20,11 @@ C++ 学习和使用了多年，一直以来使用的都是 C++ 98, 如今看到 
 * 0. [目录](00-Table_of_Contents.md)
 * 1. [前言](01-Preface.md)
 * 3. [风格](03-Style.md)
+* 4. [考虑安全性](04-Considering_Safety.md)
 
-未翻译
-
+待翻译章节：
 
 * 2. [使用有效的工具](02-Use_the_Tools_Available.md)
-* 4. [考虑安全性](04-Considering_Safety.md)
 * 5. [考虑可维护性](05-Considering_Maintainability.md)
 * 6. [考虑可移植性](06-Considering_Portability.md)
 * 7. [考虑并发性](07-Considering_Threadability.md)
